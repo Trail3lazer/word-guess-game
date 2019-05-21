@@ -10,16 +10,21 @@ var artists = ["Guns N' Roses","Kansas", "Styx", "Bon Jovi", "Bon Jovi", "Def Le
     var song= songs[random].toLocaleLowerCase()
     var artist= artists[random]
 
-    for (var i = 0; i < song.length; i++) {
-        guess = document.createElement('li');
-        guess.setAttribute('id', 'dash'+i);
+function start() {
+    $("#hint").append(artist)
+    $("#song").text(song)
+
+    for (var i=0; i< song.length; i++){
+        $("#dash").append("<ltr id=ltr"+i+"></ltr>");
         if (song[i] === " ") {
-          guess.innerHTML = " ";
+        $("#ltr"+i).html(" &nbsp; ");
         } 
         else {
-          guess.innerHTML = "-";
-        }
+        $("#ltr"+i).text(" _ ");
+        };
     };
+};
+
 
 function countDown()  {
     if (guess[guess.length - 1] === (" " + random)) {
@@ -47,24 +52,15 @@ function countDown()  {
     }
 };
 
-$("#hint").append(artist)
-$("#song").text(song)
-
-for (var i=0; i< song.length; i++){
-    $("#dash").append("<ltr id="+i+">-</ltr>");
-};
-
 //for (var i=0; i< song.length; i++){
 //    var str = song.indexOf(" ");
 //    $("#dash").text(song[str])
 //};
 
 function print() {
-$("#guess").text(guess);
-
-$("#left").text(left);
-
-$("#losses").text(losses);
+    $("#guess").html(lettersGuessed);
+    $("#left").text(left);
+    $("#losses").text(losses);
 };
 
 document.onkeyup = function(event) {
