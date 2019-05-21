@@ -1,0 +1,11 @@
+body {
+    background-image: url(https://us.123rf.com/450wm/sylverarts/sylverarts1411/sylverarts141100846/33631238-stock-vector-electric-guitars-seamless-background-music-theme-seamless-pattern-with-hand-drawn-lines-textures-vec.jpg?ver=6)
+}
+
+#titleBar {
+    font-family: Verdana, Geneva, Tahoma, sans-serif
+}
+
+.bg-dark {
+    opacity: .97;
+}

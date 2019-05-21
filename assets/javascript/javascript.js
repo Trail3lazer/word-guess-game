@@ -1,11 +1,12 @@
 
-var abc = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
+var songs = ["Welcome To The Jungle","Carry on Wayward Son", "Renegade", "Runaway", "Livin' On a Prayer", "Rock of Ages", "Sweet Child O' Mine", "Paradise City", "Back In Black", "Thunderstruck", "Enter Sandman", "The Unforgiven", "Eye of the Tiger", "Smells Like Teen Spirit", "All The Small Things", "How You Remind Me", "Numb", "The Reason", "T.N.T.", "Knights of Cydonia", "Pant It, Black"];
+var artist = ["Guns N' Roses","Kansas", "Styx", "Bon Jovi", "Bon Jovi", "Def Leppard", "Guns N' Roses", "Guns N' Roses", "AC/DC", "AC/DC", "Metallica", "Metallica", "Survivor", "Nirvana", "Blink-182", "Nickleback", "Linkin Park", "Hoobastank", "AC/DC", "Muse", "The Rolling Stones"]
 
     var wins= 0;
     var losses= 0;
     var left= 9;
     var guess= [];
-    var random= (abc[Math.floor(Math.random()*27)]);
+    var random= (songs[Math.floor(Math.random()*27)]);
 
 function countDown()  {
     if (guess[guess.length - 1] === (" " + random)) {
@@ -15,7 +16,7 @@ function countDown()  {
         guess = [];
         document.getElementById("wins").innerHTML = wins;
         document.getElementById("left").innerHTML = left;
-        random = (abc[Math.floor(Math.random()*27)])
+        random = (songs[Math.floor(Math.random()*27)])
         alert("Nice guess!");
     
     }
