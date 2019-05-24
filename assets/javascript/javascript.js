@@ -1,3 +1,4 @@
+$(document).ready(function () {
 //Arrays
 var songs = ["Welcome To The Jungle","Carry on Wayward Son", "Renegade", "Runaway", "Livin On a Prayer", "Rock of Ages", "Sweet Child O Mine", "Paradise City", "Back In Black", "Thunderstruck", "Enter Sandman", "The Unforgiven", "Eye of the Tiger", "Smells Like Teen Spirit", "All The Small Things", "How You Remind Me", "Numb", "The Reason", "TNT", "Knights of Cydonia", "Paint It Black"];
 var artists = ["Guns N' Roses","Kansas", "Styx", "Bon Jovi", "Bon Jovi", "Def Leppard", "Guns N' Roses", "Guns N' Roses", "AC/DC", "AC/DC", "Metallica", "Metallica", "Survivor", "Nirvana", "Blink-182", "Nickleback", "Linkin Park", "Hoobastank", "AC/DC", "Muse", "The Rolling Stones"]
@@ -9,26 +10,27 @@ var losses= 0;
 var correct= false;
 var lettersGuessed= [];
 var random= [Math.floor(Math.random()*22)];
-var song= songs[random].toLocaleUpperCase();
+var song= songs[random].toLocaleUpperCase(); 
 var artist= artists[random];
 var letter = "";
 
-
-
 function start() {
-
-    $("#hint").append(artist)
-    $("#song").text(song)
-
+    
     for (var i=0; i< song.length; i++){
         $("#dash").append("<span id=ltr"+i+"></span>");
         if (song.charAt(i) === " ") {
-        $("#ltr"+i).html("&#160;");
+            $("#ltr"+i).text(" ");
         } 
         else {
-        $("#ltr"+i).text(" _ ");
+            $("#ltr"+i).text(" _ ");
         };
     };
+    //for (var i = 0; i < song.length; i++) {
+    //    song = song.replace(" ", "&nbsp");
+    //    console.log(song)
+    //};
+
+    $("#hint").append(artist)
     $("#startBtn").remove();
 };
 
@@ -62,7 +64,6 @@ function print() {
     $("#guess").html(lettersGuessed);
     $("#left").text(left);
     $("#losses").text(losses);
-    $("#letters").text($("#dash").text())
 }; 
     
 $("#titleBar").append("<div id='startBtn' class='btn btn-success'>Click here to start</div>");
@@ -73,12 +74,13 @@ document.onkeyup = function(event) {
     check()
     lettersGuessed.push(" " + letter);
     print();
-    if ($("#dash").text() === song) {
-        //$("#dash").append('<div class="alert-success">YOU WIN!</div>')
-        alert("Win")
+    if (document.getElementById("dash").textContent === song) {
+        $("#dash").append('<div class="alert-success rounded p-3 text-center text-display-3">YOU WIN!</div>')
     }
 };
 
 
 
 //wins = (wins+1);
+
+});
