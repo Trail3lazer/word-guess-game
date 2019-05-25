@@ -5,7 +5,7 @@ var artists = ["Guns N' Roses","Kansas", "Styx", "Bon Jovi", "Bon Jovi", "Def Le
 var hangman = ["assets/images/noose.png","assets/images/noose1.png","assets/images/noose2.png","assets/images/noose3.png","assets/images/noose4.png","assets/images/noose5.png","assets/images/noose6.png"]
 //Global Variables
 var wins= 0;
-var left= 7;
+var left= 6;
 var losses= 0;
 var correct= false;
 var lettersGuessed= [];
@@ -63,7 +63,7 @@ function wordCheck() {
 function countDown() {
     left--;
     nooseSwitcher()
-    if (left<1) {
+    if (left<0) {
         losses++
         reset();
     }
@@ -87,7 +87,7 @@ function nooseSwitcher() {
 };
 
 function reset() {
-    left = 7;
+    left = 6;
     correct = false;
     lettersGuessed = [];
     random = [Math.floor(Math.random()*22)];
