@@ -3,9 +3,9 @@ $(document).ready(function () {
 var songs = ["Welcome To The Jungle","Carry on Wayward Son", "Renegade", "Runaway", "Livin On a Prayer", "Rock of Ages", "Sweet Child O Mine", "Paradise City", "Back In Black", "Thunderstruck", "Enter Sandman", "The Unforgiven", "Eye of the Tiger", "Smells Like Teen Spirit", "All The Small Things", "How You Remind Me", "Numb", "The Reason", "TNT", "Knights of Cydonia", "Paint It Black"];
 var artists = ["Guns N' Roses","Kansas", "Styx", "Bon Jovi", "Bon Jovi", "Def Leppard", "Guns N' Roses", "Guns N' Roses", "AC/DC", "AC/DC", "Metallica", "Metallica", "Survivor", "Nirvana", "Blink-182", "Nickleback", "Linkin Park", "Hoobastank", "AC/DC", "Muse", "The Rolling Stones"]
 var hangman = ["assets\images\noose.png","assets\images\noose1.png","assets\images\noose2.png","assets\images\noose3.png","assets\images\noose4.png","assets\images\noose5.png","assets\images\noose6.png"]
-//Stat Variables
+//Global Variables
 var wins= 0;
-var left= 9;
+var left= 7;
 var losses= 0;
 var correct= false;
 var lettersGuessed= [];
@@ -15,24 +15,22 @@ var artist= artists[random];
 var letter = "";
 
 function start() {
-    
+    $("#startBtn").remove();
+    dash()
+    print()
+};
+
+function dash() {
     for (var i=0; i< song.length; i++){
         $("#dash").append("<span id=ltr"+i+"></span>");
         if (song.charAt(i) === " ") {
             $("#ltr"+i).text(" ");
         } 
         else {
-            $("#ltr"+i).text(" _ ");
+            $("#ltr"+i).html(" _ ");
         };
     };
-    //for (var i = 0; i < song.length; i++) {
-    //    song = song.replace(" ", "&nbsp");
-    //    console.log(song)
-    //};
-
-    $("#hint").append(artist)
-    $("#startBtn").remove();
-};
+}
 
 function check() {
     for (var i = 0; i < song.length; i++) {
@@ -47,10 +45,18 @@ function check() {
     else {
         countDown();
     };
+    wordGuess();
 };
 
+function wordGuess() {
+    if (document.getElementById("dash").textContent === song) {
+        alert("Nice Great Job")
+        $("#dash").append('<div class="alert-success rounded p-3 text-center text-display-3">Press any key to play again.</div>')
+        document.onkeydown = reset()
+    }
+}
+
 function countDown()  {
-    
     left--;
     alert("Try Again");
     if (left<1) {
@@ -61,26 +67,49 @@ function countDown()  {
 };
 
 function print() {
+    $("#hint").html(artist);
+    $("#wins").html(wins)
+    $("#losses").html(losses);
     $("#guess").html(lettersGuessed);
-    $("#left").text(left);
-    $("#losses").text(losses);
+    $("#left").html(left);
 }; 
     
-$("#titleBar").append("<div id='startBtn' class='btn btn-success'>Click here to start</div>");
-$("#startBtn").click(start);
-
 document.onkeyup = function(event) {
     letter = event.key.toLocaleUpperCase();
     check()
     lettersGuessed.push(" " + letter);
     print();
-    if (document.getElementById("dash").textContent === song) {
-        $("#dash").append('<div class="alert-success rounded p-3 text-center text-display-3">YOU WIN!</div>')
-    }
+    
 };
 
+function reset() {
+    left = 7;
+    correct = false;
+    lettersGuessed = [];
+    random = [Math.floor(Math.random()*22)];
+    song = songs[random].toLocaleUpperCase(); 
+    artist = artists[random];
+    letter = "";
+    print()
+    dash()
+    document.onkeydown = undefined
+
+}
 
 
-//wins = (wins+1);
+$("#titleBar").append("<div id='startBtn' class='btn btn-success'>Click here to start</div>");
+$("#startBtn").click(start);
 
 });
+
+//-----HW Hack-a-thon Code------//
+//function wordCheck() {
+//    for (let i = 0; i < song.length; i++) {
+//        if(!lettersGuessed.includes(song.charAt[i])){
+//            if (song.charAt[i] !== " ") {
+//                return true;
+//            }
+//        }
+//    }
+//    return false;
+//};

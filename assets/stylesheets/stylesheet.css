@@ -9,3 +9,8 @@ body {
 .bg-dark {
     opacity: .97;
 }
+
+#noose {
+    width: inherit;
+    height: inherit;
+}
