@@ -13,6 +13,7 @@ var random= [Math.floor(Math.random()*22)];
 var song= songs[random].toLocaleUpperCase(); 
 var artist= artists[random];
 var letter = "";
+var a = 1
 
 //Functions
 function start() {
@@ -75,8 +76,6 @@ function print() {
 }; 
 
 function nooseSwitcher() {
-    let a = 1
-    //document.getElementById("noose").getAttribute("src", hangman[a])
     $("#noose").attr("src", hangman[a])
     if (a<6) {
         a++
