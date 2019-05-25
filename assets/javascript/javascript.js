@@ -10,10 +10,10 @@ var losses= 0;
 var correct= false;
 var lettersGuessed= [];
 var random= [Math.floor(Math.random()*22)];
-var song= songs[random].toLocaleUpperCase(); 
+var song= songs[random].toUpperCase(); 
 var artist= artists[random];
 var letter = "";
-var a = 1
+var nooseCounter = 1
 
 //Functions
 function start() {
@@ -54,7 +54,7 @@ function check() {
 
 function wordCheck() {
     if (document.getElementById("dash").textContent === song) {
-        $("#dash").append('<div class="alert-success rounded p-3 text-center text-display-3">Press any key to play again.</div>')
+        $("#mainContent").append('<div id="winner" class="alert-success rounded p-3 text-center text-display-3 mt-5">Press any key to play again.</div>')
         wins++
         document.onkeyup = reset
     };
@@ -63,6 +63,9 @@ function wordCheck() {
 function countDown() {
     left--;
     nooseSwitcher()
+    if (left===0){
+        $("#dash").html('<div id="loser" class="alert-danger rounded p-3 text-center text-display-3 mt-5">Press any key to play again.</div>')
+    }
     if (left<0) {
         losses++
         reset();
@@ -78,11 +81,11 @@ function print() {
 }; 
 
 function nooseSwitcher() {
-    $("#noose").attr("src", hangman[a])
-    if (a<6) {
-        a++
+    $("#noose").attr("src", hangman[nooseCounter])
+    if (nooseCounter<6) {
+        nooseCounter++
     } else {
-        a=0
+        nooseCounter=0
     }
 };
 
@@ -94,6 +97,8 @@ function reset() {
     song = songs[random].toLocaleUpperCase(); 
     artist = artists[random];
     letter = "";
+    $("#winner").remove()
+    $("#loser").remove()
     print();
     dash();
     keyup();
