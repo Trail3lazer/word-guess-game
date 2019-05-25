@@ -64,7 +64,7 @@ function countDown() {
     left--;
     nooseSwitcher()
     if (left===0){
-        $("#dash").html('<div id="loser" class="alert-danger rounded p-3 text-center text-display-3 mt-5">Press any key to play again.</div>')
+        $("#mainContent").append('<div id="loser" class="alert-danger rounded p-3 text-center text-display-3 mt-5">Press any key to play again.</div>')
     }
     if (left<0) {
         losses++
@@ -84,8 +84,6 @@ function nooseSwitcher() {
     $("#noose").attr("src", hangman[nooseCounter])
     if (nooseCounter<6) {
         nooseCounter++
-    } else {
-        nooseCounter=0
     }
 };
 
@@ -97,6 +95,8 @@ function reset() {
     song = songs[random].toLocaleUpperCase(); 
     artist = artists[random];
     letter = "";
+    nooseCounter = 0
+    $("#noose").attr("src", hangman[nooseCounter])
     $("#winner").remove()
     $("#loser").remove()
     print();
