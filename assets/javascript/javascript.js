@@ -55,6 +55,7 @@ function check() {
 function wordCheck() {
     if (document.getElementById("dash").textContent === song) {
         $("#dash").append('<div class="alert-success rounded p-3 text-center text-display-3">Press any key to play again.</div>')
+        wins++
         document.onkeyup = reset
     };
 };
@@ -63,6 +64,7 @@ function countDown() {
     left--;
     nooseSwitcher()
     if (left<1) {
+        losses++
         reset();
     }
 };
