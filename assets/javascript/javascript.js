@@ -2,7 +2,7 @@ $(document).ready(function () {
 //Arrays
 var songs = ["Welcome To The Jungle","Carry on Wayward Son", "Renegade", "Runaway", "Livin On a Prayer", "Rock of Ages", "Sweet Child O Mine", "Paradise City", "Back In Black", "Thunderstruck", "Enter Sandman", "The Unforgiven", "Eye of the Tiger", "Smells Like Teen Spirit", "All The Small Things", "How You Remind Me", "Numb", "The Reason", "TNT", "Knights of Cydonia", "Paint It Black"];
 var artists = ["Guns N' Roses","Kansas", "Styx", "Bon Jovi", "Bon Jovi", "Def Leppard", "Guns N' Roses", "Guns N' Roses", "AC/DC", "AC/DC", "Metallica", "Metallica", "Survivor", "Nirvana", "Blink-182", "Nickleback", "Linkin Park", "Hoobastank", "AC/DC", "Muse", "The Rolling Stones"]
-var hangman = ["assets\images\noose.png","assets\images\noose1.png","assets\images\noose2.png","assets\images\noose3.png","assets\images\noose4.png","assets\images\noose5.png","assets\images\noose6.png"]
+var hangman = ["assets/images/noose.png","assets/images/noose1.png","assets/images/noose2.png","assets/images/noose3.png","assets/images/noose4.png","assets/images/noose5.png","assets/images/noose6.png"]
 //Global Variables
 var wins= 0;
 var left= 7;
@@ -17,11 +17,13 @@ var letter = "";
 //Functions
 function start() {
     $("#startBtn").remove();
-    dash()
-    print()
+    dash();
+    print();
+    keyup();
 };
 
 function dash() {
+    $("#dash").empty();
     for (var i=0; i< song.length; i++){
         $("#dash").append("<span id=ltr"+i+"></span>");
         if (song.charAt(i) === " ") {
@@ -46,24 +48,21 @@ function check() {
     else {
         countDown();
     };
-    wordGuess();
+    wordCheck();
 };
 
-function wordGuess() {
+function wordCheck() {
     if (document.getElementById("dash").textContent === song) {
-        alert("Nice Great Job")
         $("#dash").append('<div class="alert-success rounded p-3 text-center text-display-3">Press any key to play again.</div>')
-        document.onkeydown = reset()
-    }
-}
+        document.onkeyup = reset
+    };
+};
 
-function countDown()  {
+function countDown() {
     left--;
-    alert("Try Again");
+    nooseSwitcher()
     if (left<1) {
-        losses++;
-        left = 9;
-        lettersGuessed = [];
+        reset();
     }
 };
 
@@ -75,6 +74,17 @@ function print() {
     $("#left").html(left);
 }; 
 
+function nooseSwitcher() {
+    let a = 1
+    //document.getElementById("noose").getAttribute("src", hangman[a])
+    $("#noose").attr("src", hangman[a])
+    if (a<6) {
+        a++
+    } else {
+        a=0
+    }
+};
+
 function reset() {
     left = 7;
     correct = false;
@@ -83,20 +93,19 @@ function reset() {
     song = songs[random].toLocaleUpperCase(); 
     artist = artists[random];
     letter = "";
-    print()
-    $("#dash").empty()
-    dash()
-    document.onkeydown = undefined
+    print();
+    dash();
+    keyup();
+};
 
-}
-
-//Event Handler
+function keyup() {
 document.onkeyup = function(event) {
     letter = event.key.toLocaleUpperCase();
     check()
     lettersGuessed.push(" " + letter);
     print();
     
+};
 };
 
 //Initiation via User
