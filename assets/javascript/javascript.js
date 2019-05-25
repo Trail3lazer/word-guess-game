@@ -14,6 +14,7 @@ var song= songs[random].toLocaleUpperCase();
 var artist= artists[random];
 var letter = "";
 
+//Functions
 function start() {
     $("#startBtn").remove();
     dash()
@@ -73,14 +74,6 @@ function print() {
     $("#guess").html(lettersGuessed);
     $("#left").html(left);
 }; 
-    
-document.onkeyup = function(event) {
-    letter = event.key.toLocaleUpperCase();
-    check()
-    lettersGuessed.push(" " + letter);
-    print();
-    
-};
 
 function reset() {
     left = 7;
@@ -91,12 +84,22 @@ function reset() {
     artist = artists[random];
     letter = "";
     print()
+    $("#dash").empty()
     dash()
     document.onkeydown = undefined
 
 }
 
+//Event Handler
+document.onkeyup = function(event) {
+    letter = event.key.toLocaleUpperCase();
+    check()
+    lettersGuessed.push(" " + letter);
+    print();
+    
+};
 
+//Initiation via User
 $("#titleBar").append("<div id='startBtn' class='btn btn-success'>Click here to start</div>");
 $("#startBtn").click(start);
 
